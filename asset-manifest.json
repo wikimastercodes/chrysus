@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/chrysus/static/css/main.1a22aebf.css",
+    "main.js": "/chrysus/static/js/main.5203a393.js",
+    "static/js/453.a698f2c3.chunk.js": "/chrysus/static/js/453.a698f2c3.chunk.js",
+    "index.html": "/chrysus/index.html",
+    "main.1a22aebf.css.map": "/chrysus/static/css/main.1a22aebf.css.map",
+    "main.5203a393.js.map": "/chrysus/static/js/main.5203a393.js.map",
+    "453.a698f2c3.chunk.js.map": "/chrysus/static/js/453.a698f2c3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1a22aebf.css",
+    "static/js/main.5203a393.js"
+  ]
+}
