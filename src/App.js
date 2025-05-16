@@ -13,7 +13,6 @@ function App() {
   const [showPawn, setShowPawn] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Refs for scrolling
   const goldRef = useRef(null);
   const silverRef = useRef(null);
   const pawnRef = useRef(null);
@@ -41,7 +40,7 @@ function App() {
       {/* Navbar */}
       <div className="navbar">
         <div className="logo">
-          <img src="/images/logos.png" alt="Logo" />
+          <div className="logo-icon" />
           <h2>CHRYSUS</h2>
         </div>
         <div className="search-bar">
@@ -71,10 +70,8 @@ function App() {
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Hero Section */}
         <div className="card">
           <div className="hero-section">
-            <img src="/images/card.png" alt="Hero" className="hero-image" />
             <div className="hero-text">
               <h1>Welcome</h1>
               <h1>to</h1>
@@ -91,12 +88,10 @@ function App() {
         <div className="gold-section" ref={goldRef}>
           <h2>Gold Bill</h2>
           <div className="gold-cards">
-            <div className="gold-card" ref={gold916Ref} onClick={() => setShowPureGold(true)}>
-              <img src="/images/G916.png" alt="916 Gold" className="card-image" />
+            <div className="gold-card gold-card-916" ref={gold916Ref} onClick={() => setShowPureGold(true)}>
               <span className="card-text">916</span>
             </div>
-            <div className="gold-card" ref={gold22kRef} onClick={() => setShowAlloyGold(true)}>
-              <img src="/images/G22k.png" alt="22K Gold" className="card-image" />
+            <div className="gold-card gold-card-22k" ref={gold22kRef} onClick={() => setShowAlloyGold(true)}>
               <span className="card-text">22K</span>
             </div>
           </div>
@@ -107,7 +102,6 @@ function App() {
           <h2>Silver Bill</h2>
           <div className="silver-cards">
             <div className="silver-card" onClick={() => setShowSilver(true)}>
-              <img src="/images/Silver.png" alt="Silver" className="card-image" />
               <span className="card-text">Silver</span>
             </div>
           </div>
@@ -118,7 +112,6 @@ function App() {
           <h2>Pawn Calculator</h2>
           <div className="pawn-cards">
             <div className="pawn-card" onClick={() => setShowPawn(true)}>
-              <img src="/images/Pawn.png" alt="Pawn" className="card-image" />
               <span className="card-text">Pawn</span>
             </div>
           </div>
