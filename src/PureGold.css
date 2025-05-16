@@ -1,0 +1,34 @@
+@media print {
+  .no-print {
+    display: none !important;
+  }
+    body * {
+      visibility: hidden;
+    }
+    #my-section, #my-section * {
+      visibility: visible;
+    }
+    #my-section {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 16px;
+    }
+    .billtable td{
+      padding:16px;
+    }
+  }
+  .form{
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: fixed;
+  }
+  .billtable{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+
+

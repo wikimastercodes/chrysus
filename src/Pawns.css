@@ -1,0 +1,19 @@
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #my-section, #my-section * {
+    visibility: visible;
+  }
+
+  #my-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
