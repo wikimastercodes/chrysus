@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/chrysus/static/css/main.f46acde0.css",
-    "main.js": "/chrysus/static/js/main.c9ef8573.js",
+    "main.css": "/chrysus/static/css/main.49d1b33c.css",
+    "main.js": "/chrysus/static/js/main.da76d54e.js",
     "static/js/453.a698f2c3.chunk.js": "/chrysus/static/js/453.a698f2c3.chunk.js",
     "static/media/Pawn.png": "/chrysus/static/media/Pawn.486beb4f04fe73da22b7.png",
     "static/media/Silver.png": "/chrysus/static/media/Silver.d8ffe227e84783c99b48.png",
@@ -9,13 +9,14 @@
     "static/media/G22k.png": "/chrysus/static/media/G22k.428cf3b2ebce78878f3b.png",
     "static/media/card.png": "/chrysus/static/media/card.205462adcbd17d987ac4.png",
     "static/media/logos.png": "/chrysus/static/media/logos.793e0d63838b64031a58.png",
+    "static/media/background.jpg": "/chrysus/static/media/background.96f3367e3cc1213c1818.jpg",
     "index.html": "/chrysus/index.html",
-    "main.f46acde0.css.map": "/chrysus/static/css/main.f46acde0.css.map",
-    "main.c9ef8573.js.map": "/chrysus/static/js/main.c9ef8573.js.map",
+    "main.49d1b33c.css.map": "/chrysus/static/css/main.49d1b33c.css.map",
+    "main.da76d54e.js.map": "/chrysus/static/js/main.da76d54e.js.map",
     "453.a698f2c3.chunk.js.map": "/chrysus/static/js/453.a698f2c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f46acde0.css",
-    "static/js/main.c9ef8573.js"
+    "static/css/main.49d1b33c.css",
+    "static/js/main.da76d54e.js"
   ]
 }
