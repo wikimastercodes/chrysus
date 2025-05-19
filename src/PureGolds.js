@@ -31,16 +31,20 @@ function PureGold({ onClose }) {
     const D = parseFloat(form.oldNetWeight) || 0;
     const E = parseFloat(form.oldRate) || 0;
 
-    const F = A/100*15;
+    const F = A / 100 * 15;
     const G = A + F;
     const H = G * B;
     const I = H + C;
-    const J = D/100*10;
+    const J = D / 100 * 10;
     const K = D - J;
     const L = K * E;
 
     const gstAmount = includeGST ? (0.03 * I) : 0;
     const M = I + gstAmount - L;
+
+    if (M < 0) {
+      alert(`We will give this amount: ₹${Math.abs(M).toFixed(2)}`);
+    }
 
     setBill({
       netWeight: A,
@@ -87,16 +91,26 @@ function PureGold({ onClose }) {
           </h2>
           <table>
             <tbody>
-              <tr><td><label>Net Weight:</label></td>
-                <td><input type="number" name="netWeight" step="0.01" value={form.netWeight} onChange={handleChange} /></td></tr>
-              <tr><td><label>Rate Per Gram:</label></td>
-                <td><input type="number" name="ratePerGram" value={form.ratePerGram} onChange={handleChange} /></td></tr>
-              <tr><td><label>Labour Charge:</label></td>
-                <td><input type="number" name="labourCharge" value={form.labourCharge} onChange={handleChange} /></td></tr>
-              <tr><td><label>Old Jewel Net Weight:</label></td>
-                <td><input type="number" name="oldNetWeight" value={form.oldNetWeight} onChange={handleChange} /></td></tr>
-              <tr><td><label>Old Jewel Rate:</label></td>
-                <td><input type="number" name="oldRate" value={form.oldRate} onChange={handleChange} /></td></tr>
+              <tr>
+                <td><label>Net Weight:</label></td>
+                <td><input type="number" name="netWeight" step="0.01" value={form.netWeight} onChange={handleChange} /></td>
+              </tr>
+              <tr>
+                <td><label>Rate Per Gram:</label></td>
+                <td><input type="number" name="ratePerGram" value={form.ratePerGram} onChange={handleChange} /></td>
+              </tr>
+              <tr>
+                <td><label>Labour Charge:</label></td>
+                <td><input type="number" name="labourCharge" value={form.labourCharge} onChange={handleChange} /></td>
+              </tr>
+              <tr>
+                <td><label>Old Jewel Net Weight:</label></td>
+                <td><input type="number" name="oldNetWeight" value={form.oldNetWeight} onChange={handleChange} /></td>
+              </tr>
+              <tr>
+                <td><label>Old Jewel Rate:</label></td>
+                <td><input type="number" name="oldRate" value={form.oldRate} onChange={handleChange} /></td>
+              </tr>
               <tr>
                 <td><label>Include GST (3%)</label></td>
                 <td><input type="checkbox" checked={includeGST} onChange={handleCheckboxChange} /></td>
@@ -111,18 +125,18 @@ function PureGold({ onClose }) {
         <div ref={resultRef} id="my-section" style={resultStyle}>
           <table className='billtable'>
             <tbody>
-              <tr><td>Net Weight:</td><td>{bill.netWeight} gram</td></tr>
-              <tr><td>Wastage:</td><td>{bill.wastage} gram</td></tr>
-              <tr><td>Rate Per Gram:</td><td>{bill.ratePerGram} Rs</td></tr>
-              <tr><td>Labour Charge:</td><td>{bill.labourCharge} Rs</td></tr>
-              <tr><td>Jewel Rate:</td><td>{bill.jewelRate.toFixed(2)} Rs</td></tr>
-              {bill.gst !== null && <tr><td>GST (3%):</td><td>{bill.gst.toFixed(2)} Rs</td></tr>}
-              <tr><td>Old Jewel Net Weight:</td><td>{bill.oldNetWeight} gram</td></tr>
-              <tr><td>Old Jewel Final Rate:</td><td>{bill.oldFinalRate.toFixed(2)} Rs</td></tr>
-              <tr><td><hr />Total:</td><td><hr />{bill.total.toFixed(2)} Rs</td></tr>
+              <tr><td>Net Weight:</td><td>{bill.netWeight.toFixed(3)} gram</td></tr>
+              <tr><td>Wastage:</td><td>{bill.wastage.toFixed(3)} gram</td></tr>
+              <tr><td>Rate Per Gram:</td><td>{bill.ratePerGram.toFixed(3)} Rs</td></tr>
+              <tr><td>Labour Charge:</td><td>{bill.labourCharge.toFixed(3)} Rs</td></tr>
+              <tr><td>Jewel Rate:</td><td>{bill.jewelRate.toFixed(3)} Rs</td></tr>
+              {bill.gst !== null && <tr><td>GST (3%):</td><td>{bill.gst.toFixed(3)} Rs</td></tr>}
+              <tr><td>Old Jewel Net Weight:</td><td>{bill.oldNetWeight.toFixed(3)} gram</td></tr>
+              <tr><td>Old Jewel Final Rate:</td><td>{bill.oldFinalRate.toFixed(3)} Rs</td></tr>
+              <tr><td><hr />Total:</td><td><hr />{bill.total.toFixed(3)} Rs</td></tr>
             </tbody>
           </table>
-          <center style={{ marginTop: '20px' }}className="no-print">
+          <center style={{ marginTop: '20px' }} className="no-print">
             <button onClick={handlePrint} style={buttonStyle}>Print</button>
             <button onClick={handleReset} style={buttonStyle}>Reset</button>
           </center>

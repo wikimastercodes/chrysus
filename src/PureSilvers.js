@@ -28,19 +28,30 @@ function Silver({ onClose }) {
     const A = parseFloat(form.netWeight) || 0;
     const B = parseFloat(form.ratePerGram) || 0;
     const C = parseFloat(form.labourCharge) || 0;
-    const D = parseFloat(form.oldNetWeight) || 0;
+    const D_input = parseFloat(form.oldNetWeight) || 0;
     const E = parseFloat(form.oldRate) || 0;
 
-    const F = A/100*10;
+    const F = A * 0.10;
     const G = A + F;
     const H = G * B;
     const I = H + C;
-    const J = D/100*10;
+
+    let D = D_input > A ? A : D_input;
+    const J = D * 0.10;
     const K = D - J;
-    const L = K * E;
+    let L = K * E;
+
+    if (D_input > A) {
+      const extra = (D_input - A) * (B / 2);
+      L += extra;
+    }
 
     const gstAmount = includeGST ? (0.03 * I) : 0;
     const M = I + gstAmount - L;
+
+    if (M < 0) {
+      alert(`We will give this amount: ₹${Math.abs(M).toFixed(2)}`);
+    }
 
     setBill({
       netWeight: A,
@@ -48,7 +59,7 @@ function Silver({ onClose }) {
       ratePerGram: B,
       labourCharge: C,
       jewelRate: I,
-      oldNetWeight: D,
+      oldNetWeight: D_input,
       oldFinalRate: L,
       gst: includeGST ? gstAmount : null,
       total: M
@@ -82,9 +93,7 @@ function Silver({ onClose }) {
       <form className='form' onSubmit={handleSubmit} style={formStyle}>
         <button type="button" onClick={onClose} style={closeBtnStyle}>✕</button>
         <center>
-          <h2 style={{ color: 'tan', fontFamily: 'Arial Black' }}>
-            SILVER BILL<br />
-          </h2>
+          <h2 style={{ color: 'tan', fontFamily: 'Arial Black' }}>SILVER BILL</h2>
           <table>
             <tbody>
               <tr><td><label>Net Weight:</label></td>
@@ -111,18 +120,18 @@ function Silver({ onClose }) {
         <div ref={resultRef} id="my-section" style={resultStyle}>
           <table className='billtable'>
             <tbody>
-              <tr><td>Net Weight:</td><td>{bill.netWeight} gram</td></tr>
-              <tr><td>Wastage:</td><td>{bill.wastage} gram</td></tr>
-              <tr><td>Rate Per Gram:</td><td>{bill.ratePerGram} Rs</td></tr>
-              <tr><td>Labour Charge:</td><td>{bill.labourCharge} Rs</td></tr>
-              <tr><td>Jewel Rate:</td><td>{bill.jewelRate.toFixed(2)} Rs</td></tr>
-              {bill.gst !== null && <tr><td>GST (3%):</td><td>{bill.gst.toFixed(2)} Rs</td></tr>}
-              <tr><td>Old Jewel Net Weight:</td><td>{bill.oldNetWeight} gram</td></tr>
-              <tr><td>Old Jewel Final Rate:</td><td>{bill.oldFinalRate.toFixed(2)} Rs</td></tr>
-              <tr><td><hr />Total:</td><td><hr />{bill.total.toFixed(2)} Rs</td></tr>
+              <tr><td>Net Weight:</td><td>{bill.netWeight.toFixed(3)} gram</td></tr>
+              <tr><td>Wastage:</td><td>{bill.wastage.toFixed(3)} gram</td></tr>
+              <tr><td>Rate Per Gram:</td><td>{bill.ratePerGram.toFixed(3)} Rs</td></tr>
+              <tr><td>Labour Charge:</td><td>{bill.labourCharge.toFixed(3)} Rs</td></tr>
+              <tr><td>Jewel Rate:</td><td>{bill.jewelRate.toFixed(3)} Rs</td></tr>
+              {bill.gst !== null && <tr><td>GST (3%):</td><td>{bill.gst.toFixed(3)} Rs</td></tr>}
+              <tr><td>Old Jewel Net Weight:</td><td>{bill.oldNetWeight.toFixed(3)} gram</td></tr>
+              <tr><td>Old Jewel Final Rate:</td><td>{bill.oldFinalRate.toFixed(3)} Rs</td></tr>
+              <tr><td><hr />Total:</td><td><hr />{bill.total.toFixed(3)} Rs</td></tr>
             </tbody>
           </table>
-          <center style={{ marginTop: '20px' }}className="no-print">
+          <center style={{ marginTop: '20px' }} className="no-print">
             <button onClick={handlePrint} style={buttonStyle}>Print</button>
             <button onClick={handleReset} style={buttonStyle}>Reset</button>
           </center>
@@ -132,7 +141,7 @@ function Silver({ onClose }) {
   );
 }
 
-// Inline Styles
+// Inline styles
 const formStyle = {
   position: 'relative',
   borderRadius: '30px',

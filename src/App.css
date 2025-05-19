@@ -1,6 +1,7 @@
 /* Navigation Bar */
 body{
-  background-color: #FAEBD7;
+ background-image: url('/public/images/background.jpg');
+ background-size: cover;
 }
 .navbar {
     position: fixed;
@@ -182,6 +183,7 @@ body{
   margin-left: 190px;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
   color: white;
+  cursor: pointer;
 }
 
 /* Gold Section */
@@ -195,6 +197,7 @@ body{
   color: white;
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
 .gold-cards {
@@ -240,6 +243,7 @@ body{
   color: white;
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
 .silver-cards {
@@ -284,6 +288,7 @@ body{
   color: white;
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 .pawn-cards {
   display: flex;
