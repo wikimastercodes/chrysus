@@ -46,7 +46,7 @@ function PureGold({ onClose }) {
       alert(`We will give this amount: ₹${Math.abs(M).toFixed(2)}`);
     }
 
-    setBill({
+    const generatedBill = {
       netWeight: A.toFixed(3),
       wastage: F.toFixed(3),
       ratePerGram: B.toFixed(2),
@@ -56,7 +56,10 @@ function PureGold({ onClose }) {
       oldFinalRate: L.toFixed(2),
       gst: includeGST ? gstAmount.toFixed(2) : null,
       total: M.toFixed(2)
-    });
+    };
+
+    setBill(generatedBill);
+    window.__latestBillData = generatedBill; // ✅ Flutter can now read this when printing
   };
 
   useEffect(() => {
@@ -66,6 +69,14 @@ function PureGold({ onClose }) {
   }, [bill]);
 
   const handlePrint = () => {
+    if (!bill) {
+      alert('No bill data available to print.');
+      return;
+    }
+
+    // Make bill available globally
+    window.__latestBillData = bill;
+
     if (typeof window.PrintChannel?.postMessage === 'function') {
       const message = JSON.stringify({
         type: 'print',
