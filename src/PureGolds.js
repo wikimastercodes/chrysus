@@ -65,14 +65,29 @@ function PureGold({ onClose }) {
     }
   }, [bill]);
 
-const handlePrint = () => {
-  if (window.PrintChannel) {
-    window.PrintChannel.postMessage("print");
-  } else {
-    window.print();
-  }
-};
+  const handlePrint = () => {
+    if (window.PrintChannel && bill) {
+      const billContent = `
+GOLD BILL 916
 
+Net Weight: ${bill.netWeight.toFixed(3)} g
+Wastage: ${bill.wastage.toFixed(3)} g
+Rate Per Gram: ₹${bill.ratePerGram.toFixed(2)}
+Labour Charge: ₹${bill.labourCharge.toFixed(2)}
+Jewel Rate: ₹${bill.jewelRate.toFixed(2)}
+${bill.gst !== null ? `GST (3%): ₹${bill.gst.toFixed(2)}\n` : ''}
+Old Net Weight: ${bill.oldNetWeight.toFixed(3)} g
+Old Final Rate: ₹${bill.oldFinalRate.toFixed(2)}
+
+-------------------------------
+Total: ₹${bill.total.toFixed(2)}
+      `.trim();
+
+      window.PrintChannel.postMessage(billContent);
+    } else {
+      window.print();
+    }
+  };
 
   const handleReset = () => {
     setForm({
@@ -96,30 +111,12 @@ const handlePrint = () => {
           </h2>
           <table>
             <tbody>
-              <tr>
-                <td><label>Net Weight:</label></td>
-                <td><input type="number" name="netWeight" step="0.01" value={form.netWeight} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Rate Per Gram:</label></td>
-                <td><input type="number" name="ratePerGram" value={form.ratePerGram} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Labour Charge:</label></td>
-                <td><input type="number" name="labourCharge" value={form.labourCharge} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Old Jewel Net Weight:</label></td>
-                <td><input type="number" name="oldNetWeight" value={form.oldNetWeight} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Old Jewel Rate:</label></td>
-                <td><input type="number" name="oldRate" value={form.oldRate} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Include GST (3%)</label></td>
-                <td><input type="checkbox" checked={includeGST} onChange={handleCheckboxChange} /></td>
-              </tr>
+              <tr><td><label>Net Weight:</label></td><td><input type="number" name="netWeight" step="0.01" value={form.netWeight} onChange={handleChange} /></td></tr>
+              <tr><td><label>Rate Per Gram:</label></td><td><input type="number" name="ratePerGram" value={form.ratePerGram} onChange={handleChange} /></td></tr>
+              <tr><td><label>Labour Charge:</label></td><td><input type="number" name="labourCharge" value={form.labourCharge} onChange={handleChange} /></td></tr>
+              <tr><td><label>Old Jewel Net Weight:</label></td><td><input type="number" name="oldNetWeight" value={form.oldNetWeight} onChange={handleChange} /></td></tr>
+              <tr><td><label>Old Jewel Rate:</label></td><td><input type="number" name="oldRate" value={form.oldRate} onChange={handleChange} /></td></tr>
+              <tr><td><label>Include GST (3%)</label></td><td><input type="checkbox" checked={includeGST} onChange={handleCheckboxChange} /></td></tr>
             </tbody>
           </table>
           <input id="Submit" type="submit" value="Submit" style={submitStyle} />
@@ -151,7 +148,7 @@ const handlePrint = () => {
   );
 }
 
-// Inline Styles
+// Inline styles
 const formStyle = {
   position: 'relative',
   borderRadius: '30px',
