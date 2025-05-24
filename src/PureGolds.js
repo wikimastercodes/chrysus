@@ -47,15 +47,15 @@ function PureGold({ onClose }) {
     }
 
     setBill({
-      netWeight: A,
-      wastage: F,
-      ratePerGram: B,
-      labourCharge: C,
-      jewelRate: I,
-      oldNetWeight: D,
-      oldFinalRate: L,
-      gst: includeGST ? gstAmount : null,
-      total: M
+      netWeight: A.toFixed(3),
+      wastage: F.toFixed(3),
+      ratePerGram: B.toFixed(2),
+      labourCharge: C.toFixed(2),
+      jewelRate: I.toFixed(2),
+      oldNetWeight: D.toFixed(3),
+      oldFinalRate: L.toFixed(2),
+      gst: includeGST ? gstAmount.toFixed(2) : null,
+      total: M.toFixed(2)
     });
   };
 
@@ -66,13 +66,14 @@ function PureGold({ onClose }) {
   }, [bill]);
 
   const handlePrint = () => {
-    if (typeof window.print === 'function') {
+    if (typeof window.PrintChannel?.postMessage === 'function') {
+      const message = JSON.stringify({
+        type: 'print',
+        data: bill
+      });
+      window.PrintChannel.postMessage(message);
+    } else if (typeof window.print === 'function') {
       window.print();
-    } else if (
-      window.PrintChannel &&
-      typeof window.PrintChannel.postMessage === 'function'
-    ) {
-      window.PrintChannel.postMessage('print');
     } else {
       alert('Print is not supported in this environment.');
     }
@@ -95,35 +96,15 @@ function PureGold({ onClose }) {
       <form className='form' onSubmit={handleSubmit} style={formStyle}>
         <button className='closebut' type="button" onClick={onClose} style={closeBtnStyle}>✕</button>
         <center>
-          <h2 style={{ color: 'tan', fontFamily: 'Arial Black' }}>
-            GOLD BILL 916<br />
-          </h2>
+          <h2 style={{ color: 'tan', fontFamily: 'Arial Black' }}>GOLD BILL 916</h2>
           <table>
             <tbody>
-              <tr>
-                <td><label>Net Weight:</label></td>
-                <td><input type="number" name="netWeight" step="0.01" value={form.netWeight} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Rate Per Gram:</label></td>
-                <td><input type="number" name="ratePerGram" value={form.ratePerGram} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Labour Charge:</label></td>
-                <td><input type="number" name="labourCharge" value={form.labourCharge} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Old Jewel Net Weight:</label></td>
-                <td><input type="number" name="oldNetWeight" value={form.oldNetWeight} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Old Jewel Rate:</label></td>
-                <td><input type="number" name="oldRate" value={form.oldRate} onChange={handleChange} /></td>
-              </tr>
-              <tr>
-                <td><label>Include GST (3%)</label></td>
-                <td><input type="checkbox" checked={includeGST} onChange={handleCheckboxChange} /></td>
-              </tr>
+              <tr><td><label>Net Weight:</label></td><td><input type="number" name="netWeight" step="0.01" value={form.netWeight} onChange={handleChange} /></td></tr>
+              <tr><td><label>Rate Per Gram:</label></td><td><input type="number" name="ratePerGram" value={form.ratePerGram} onChange={handleChange} /></td></tr>
+              <tr><td><label>Labour Charge:</label></td><td><input type="number" name="labourCharge" value={form.labourCharge} onChange={handleChange} /></td></tr>
+              <tr><td><label>Old Net Weight:</label></td><td><input type="number" name="oldNetWeight" value={form.oldNetWeight} onChange={handleChange} /></td></tr>
+              <tr><td><label>Old Rate:</label></td><td><input type="number" name="oldRate" value={form.oldRate} onChange={handleChange} /></td></tr>
+              <tr><td><label>Include GST (3%):</label></td><td><input type="checkbox" checked={includeGST} onChange={handleCheckboxChange} /></td></tr>
             </tbody>
           </table>
           <input id="Submit" type="submit" value="Submit" style={submitStyle} />
@@ -134,18 +115,18 @@ function PureGold({ onClose }) {
         <div ref={resultRef} id="my-section" style={resultStyle}>
           <table className='billtable'>
             <tbody>
-              <tr><td>Net Weight:</td><td>{bill.netWeight.toFixed(3)} gram</td></tr>
-              <tr><td>Wastage:</td><td>{bill.wastage.toFixed(3)} gram</td></tr>
-              <tr><td>Rate Per Gram:</td><td>{bill.ratePerGram.toFixed(3)} Rs</td></tr>
-              <tr><td>Labour Charge:</td><td>{bill.labourCharge.toFixed(3)} Rs</td></tr>
-              <tr><td>Jewel Rate:</td><td>{bill.jewelRate.toFixed(3)} Rs</td></tr>
-              {bill.gst !== null && <tr><td>GST (3%):</td><td>{bill.gst.toFixed(3)} Rs</td></tr>}
-              <tr><td>Old Jewel Net Weight:</td><td>{bill.oldNetWeight.toFixed(3)} gram</td></tr>
-              <tr><td>Old Jewel Final Rate:</td><td>{bill.oldFinalRate.toFixed(3)} Rs</td></tr>
-              <tr><td><hr />Total:</td><td><hr />{bill.total.toFixed(3)} Rs</td></tr>
+              <tr><td>Net Weight:</td><td>{bill.netWeight} g</td></tr>
+              <tr><td>Wastage:</td><td>{bill.wastage} g</td></tr>
+              <tr><td>Rate Per Gram:</td><td>₹{bill.ratePerGram}</td></tr>
+              <tr><td>Labour Charge:</td><td>₹{bill.labourCharge}</td></tr>
+              <tr><td>Jewel Rate:</td><td>₹{bill.jewelRate}</td></tr>
+              {bill.gst && <tr><td>GST (3%):</td><td>₹{bill.gst}</td></tr>}
+              <tr><td>Old Net Weight:</td><td>{bill.oldNetWeight} g</td></tr>
+              <tr><td>Old Final Rate:</td><td>₹{bill.oldFinalRate}</td></tr>
+              <tr><td><hr />Total:</td><td><hr />₹{bill.total}</td></tr>
             </tbody>
           </table>
-          <center style={{ marginTop: '20px' }} className="no-print">
+          <center className="no-print">
             <button onClick={handlePrint} style={buttonStyle}>Print</button>
             <button onClick={handleReset} style={buttonStyle}>Reset</button>
           </center>
@@ -155,7 +136,7 @@ function PureGold({ onClose }) {
   );
 }
 
-// Inline Styles
+// Inline styles
 const formStyle = {
   position: 'relative',
   borderRadius: '30px',
