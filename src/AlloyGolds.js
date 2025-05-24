@@ -66,8 +66,29 @@ function AlloyGold({ onClose }) {
   }, [bill]);
 
   const handlePrint = () => {
+  if (window.PrintChannel && bill) {
+    const billContent = `
+GOLD BILL 
+
+Net Weight: ${bill.netWeight.toFixed(3)} g
+Wastage: ${bill.wastage.toFixed(3)} g
+Rate Per Gram: ₹${bill.ratePerGram.toFixed(2)}
+Labour Charge: ₹${bill.labourCharge.toFixed(2)}
+Jewel Rate: ₹${bill.jewelRate.toFixed(2)}
+${bill.gst !== null ? `GST (3%): ₹${bill.gst.toFixed(2)}\n` : ''}
+Old Net Weight: ${bill.oldNetWeight.toFixed(3)} g
+Old Final Rate: ₹${bill.oldFinalRate.toFixed(2)}
+
+-------------------------------
+Total: ₹${bill.total.toFixed(2)}
+    `.trim();
+
+    window.PrintChannel.postMessage(billContent);
+  } else {
     window.print();
-  };
+  }
+};
+
 
   const handleReset = () => {
     setForm({
