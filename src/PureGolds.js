@@ -66,7 +66,16 @@ function PureGold({ onClose }) {
   }, [bill]);
 
   const handlePrint = () => {
-    window.print();
+    if (typeof window.print === 'function') {
+      window.print();
+    } else if (
+      window.PrintChannel &&
+      typeof window.PrintChannel.postMessage === 'function'
+    ) {
+      window.PrintChannel.postMessage('print');
+    } else {
+      alert('Print is not supported in this environment.');
+    }
   };
 
   const handleReset = () => {
