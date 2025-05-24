@@ -59,7 +59,7 @@ function PureGold({ onClose }) {
     };
 
     setBill(generatedBill);
-    window.__latestBillData = generatedBill; // ✅ Flutter can now read this when printing
+    window.__latestBillData = generatedBill;
   };
 
   useEffect(() => {
@@ -74,7 +74,6 @@ function PureGold({ onClose }) {
       return;
     }
 
-    // Make bill available globally
     window.__latestBillData = bill;
 
     if (typeof window.PrintChannel?.postMessage === 'function') {
@@ -83,8 +82,6 @@ function PureGold({ onClose }) {
         data: bill
       });
       window.PrintChannel.postMessage(message);
-    } else if (typeof window.print === 'function') {
-      window.print();
     } else {
       alert('Print is not supported in this environment.');
     }
