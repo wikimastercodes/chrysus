@@ -65,18 +65,14 @@ function PureGold({ onClose }) {
     }
   }, [bill]);
 
-  const handlePrint = () => {
-    if (typeof window.print === 'function') {
-      window.print();
-    } else if (
-      window.PrintChannel &&
-      typeof window.PrintChannel.postMessage === 'function'
-    ) {
-      window.PrintChannel.postMessage('print');
-    } else {
-      alert('Print is not supported in this environment.');
-    }
-  };
+const handlePrint = () => {
+  if (window.PrintChannel) {
+    window.PrintChannel.postMessage("print");
+  } else {
+    window.print();
+  }
+};
+
 
   const handleReset = () => {
     setForm({
