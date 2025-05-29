@@ -4,6 +4,7 @@ import PureGold from './PureGolds';
 import AlloyGold from './AlloyGolds';
 import Silver from './PureSilvers';
 import Pawn from './Pawns';
+import CustomGold from './CustomGolds'; // <-- Added this import
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [showAlloyGold, setShowAlloyGold] = useState(false);
   const [showSilver, setShowSilver] = useState(false);
   const [showPawn, setShowPawn] = useState(false);
+  const [showCustomGold, setShowCustomGold] = useState(false); // <-- Added this state
   const [searchTerm, setSearchTerm] = useState('');
 
   const goldRef = useRef(null);
@@ -87,6 +89,7 @@ function App() {
         {/* Gold Section */}
         <div className="gold-section" ref={goldRef}>
           <h2>Gold Bill</h2>
+          <p>In "916", the default wastage is 15% and the old jewel wastage is 10%. In "22K", the default wastage is 10% and the old jewel wastage is also 10%. If you want to specify custom wastages, please use "Custom Gold"</p>
           <div className="gold-cards">
             <div className="gold-card gold-card-916" ref={gold916Ref} onClick={() => setShowPureGold(true)}>
               <span className="card-text">916</span>
@@ -94,12 +97,16 @@ function App() {
             <div className="gold-card gold-card-22k" ref={gold22kRef} onClick={() => setShowAlloyGold(true)}>
               <span className="card-text">22K</span>
             </div>
+            <div className="gold-card gold-card-custom" onClick={() => setShowCustomGold(true)}>
+              <span className="card-text">Custom Gold</span>
+            </div>
           </div>
         </div>
 
         {/* Silver Section */}
         <div className="silver-section" ref={silverRef}>
           <h2>Silver Bill</h2>
+          <p>In "Silver", the default wastage is 10%, and the old silver wastage is also 10%. If the old silver net weight is greater than the actual net weight, the excess weight is calculated at half of the actual rate. </p>
           <div className="silver-cards">
             <div className="silver-card" onClick={() => setShowSilver(true)}>
               <span className="card-text">Silver</span>
@@ -110,6 +117,7 @@ function App() {
         {/* Pawn Section */}
         <div className="pawn-section" ref={pawnRef}>
           <h2>Pawn Calculator</h2>
+          <p>This is the calculator for calculate the Interest</p>
           <div className="pawn-cards">
             <div className="pawn-card" onClick={() => setShowPawn(true)}>
               <span className="card-text">Pawn</span>
@@ -136,6 +144,11 @@ function App() {
         {showPawn && (
           <div className="modal-overlays">
             <Pawn onClose={() => setShowPawn(false)} />
+          </div>
+        )}
+        {showCustomGold && (
+          <div className="modal-overlay">
+            <CustomGold onClose={() => setShowCustomGold(false)} />
           </div>
         )}
 

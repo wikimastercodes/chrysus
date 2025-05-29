@@ -46,6 +46,11 @@ body{
   background-size: cover;
   background-position: center;
 }
+.gold-card-custom {
+  background-image: url('/public/images/custom.png');
+  background-size: cover;
+  background-position: center;
+}
 
 /* Silver Card */
 .silver-card {
@@ -199,7 +204,12 @@ body{
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
-
+.gold-section p {
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
 .gold-cards {
   display: flex;
   justify-content: center;
@@ -245,7 +255,12 @@ body{
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
-
+.silver-section p {
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
 .silver-cards {
   display: flex;
   justify-content: center;
@@ -289,6 +304,12 @@ body{
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
   cursor: pointer;
+}
+.pawn-section p {
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 }
 .pawn-cards {
   display: flex;
