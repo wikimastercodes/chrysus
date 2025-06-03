@@ -1,8 +1,5 @@
 /* Navigation Bar */
-body{
- background-image: url('/public/images/background.jpg');
- background-size: cover;
-}
+
 .navbar {
     position: fixed;
   top: 0;
@@ -16,56 +13,6 @@ body{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 10000;
 }
-/* Logo Icon as Background */
-.logo-icon {
-  height: 50px;
-  width: 50px;
-  background-image: url('/public/images/logos.png');
-  background-size: cover;
-  background-position: center;
-  margin-right: 8px;
-}
-
-/* Hero Section Background */
-.hero-section {
-  background-image: url('/public/images/card.png');
-  background-size: cover;
-  background-position: center;
-}
-
-/* 916 Gold Card */
-.gold-card-916 {
-  background-image: url('/public/images/G916.png');
-  background-size: cover;
-  background-position: center;
-}
-
-/* 22K Gold Card */
-.gold-card-22k {
-  background-image: url('/public/images/G22k.png');
-  background-size: cover;
-  background-position: center;
-}
-.gold-card-custom {
-  background-image: url('/public/images/custom.png');
-  background-size: cover;
-  background-position: center;
-}
-
-/* Silver Card */
-.silver-card {
-  background-image: url('/public/images/Silver.png');
-  background-size: cover;
-  background-position: center;
-}
-
-/* Pawn Card */
-.pawn-card {
-  background-image: url('/public/images/Pawn.png');
-  background-size: cover;
-  background-position: center;
-}
-
 .main-content {
   padding-top: 100px;
 }

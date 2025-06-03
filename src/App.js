@@ -6,6 +6,17 @@ import Silver from './PureSilvers';
 import Pawn from './Pawns';
 import CustomGold from './CustomGolds'; // <-- Added this import
 import './App.css';
+import pawnImage from './assets/Pawn.png';
+import heroImage from './assets/card.png';
+import g916Image from './assets/G916.png';
+import g22kImage from './assets/G22k.png';
+import customImage from './assets/custom.png';
+import silverImage from './assets/Silver.png';
+import logoImage from './assets/logos.png';
+import backgroundImg from './assets/background.jpg';
+import { QRCodeCanvas } from 'qrcode.react';
+
+
 
 function App() {
   const [showPureGold, setShowPureGold] = useState(false);
@@ -38,11 +49,24 @@ function App() {
   };
 
   return (
-    <div>
+    <div   style={{
+        backgroundImage: `url(${backgroundImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        width: '100%',
+      }}>
       {/* Navbar */}
       <div className="navbar">
         <div className="logo">
-          <div className="logo-icon" />
+          <div  style={{
+    height: '50px',
+    width: '50px',
+    backgroundImage: `url(${logoImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    marginRight: '8px',
+  }} className="logo-icon" />
           <h2>CHRYSUS</h2>
         </div>
         <div className="search-bar">
@@ -73,7 +97,7 @@ function App() {
       {/* Main Content */}
       <div className="main-content">
         <div className="card">
-          <div className="hero-section">
+          <div style={{backgroundImage: `url(${heroImage})`,backgroundSize: 'cover',backgroundPosition: 'center',}}className="hero-section">
             <div className="hero-text">
               <h1>Welcome</h1>
               <h1>to</h1>
@@ -91,13 +115,17 @@ function App() {
           <h2>Gold Bill</h2>
           <p>In "916", the default wastage is 15% and the old jewel wastage is 10%. In "22K", the default wastage is 10% and the old jewel wastage is also 10%. If you want to specify custom wastages, please use "Custom Gold"</p>
           <div className="gold-cards">
-            <div className="gold-card gold-card-916" ref={gold916Ref} onClick={() => setShowPureGold(true)}>
+            <div style={{backgroundImage: `url(${g916Image})`,backgroundSize: 'cover',backgroundPosition: 'center',}}className="gold-card gold-card-916" ref={gold916Ref} onClick={() => setShowPureGold(true)}>
               <span className="card-text">916</span>
             </div>
-            <div className="gold-card gold-card-22k" ref={gold22kRef} onClick={() => setShowAlloyGold(true)}>
+            <div style={{backgroundImage: `url(${g22kImage})`,backgroundSize: 'cover',backgroundPosition: 'center',}}className="gold-card gold-card-22k" ref={gold22kRef} onClick={() => setShowAlloyGold(true)}>
               <span className="card-text">22K</span>
             </div>
-            <div className="gold-card gold-card-custom" onClick={() => setShowCustomGold(true)}>
+            <div style={{
+    backgroundImage: `url(${customImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }} className="gold-card gold-card-custom" onClick={() => setShowCustomGold(true)}>
               <span className="card-text">Custom Gold</span>
             </div>
           </div>
@@ -108,7 +136,11 @@ function App() {
           <h2>Silver Bill</h2>
           <p>In "Silver", the default wastage is 10%, and the old silver wastage is also 10%. If the old silver net weight is greater than the actual net weight, the excess weight is calculated at half of the actual rate. </p>
           <div className="silver-cards">
-            <div className="silver-card" onClick={() => setShowSilver(true)}>
+            <div   style={{
+    backgroundImage: `url(${silverImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }} className="silver-card" onClick={() => setShowSilver(true)}>
               <span className="card-text">Silver</span>
             </div>
           </div>
@@ -119,7 +151,7 @@ function App() {
           <h2>Pawn Calculator</h2>
           <p>This is the calculator for calculate the Interest</p>
           <div className="pawn-cards">
-            <div className="pawn-card" onClick={() => setShowPawn(true)}>
+            <div style={{ backgroundImage: `url(${pawnImage})`,backgroundSize: 'cover',backgroundPosition: 'center', }} className="pawn-card" onClick={() => setShowPawn(true)}>
               <span className="card-text">Pawn</span>
             </div>
           </div>
@@ -151,6 +183,21 @@ function App() {
             <CustomGold onClose={() => setShowCustomGold(false)} />
           </div>
         )}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px',fontSize: '15px',fontWeight: 'bold' }}>
+          <p>"If you would like to help the poor—whether by feeding them, supporting their medical treatment, or offering any amount, even just ₹1—your kindness will be a blessing. Scan this QR code to donate."</p>
+        </div>
+                 {/* UPI Payment Button */}
+        {/* UPI QR Code */}
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
+  <QRCodeCanvas
+    value="upi://pay?pa=rcva1997@okaxis&pn=Chrysus%20Trust&cu=INR"
+    size={180}
+  />
+  <p style={{ marginTop: '8px', fontSize: '14px', fontWeight: 'bold', textAlign: 'center' }}>
+    Scan this QR code using any UPI app to donate to Chrysus Trust.
+  </p>
+</div>
+
 
         {/* Footer */}
         <footer className="footer">
